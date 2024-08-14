@@ -1,0 +1,48 @@
+/* Nav.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #B3C0D4;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 98%;
+    height: 60px;
+    z-index: 1000;
+}
+
+.logo img {
+    margin-top: 1.8rem;
+    height: 80px;
+    width: 200px;
+    margin-left: 1rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin-right: 1rem;
+}
+
+.nav-links li {
+    display: inline;
+    margin-top: 1rem;
+    font-family: 'Jomhuria Slab', serif;
+
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}

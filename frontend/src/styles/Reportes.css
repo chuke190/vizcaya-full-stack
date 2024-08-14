@@ -1,0 +1,72 @@
+.reporte-body {
+    background-color: #EBE7E7; /* Color de fondo */
+    padding: 1rem;
+    width: 200vh;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0px;
+}
+
+.reportes-titulo {
+    margin-bottom: 1rem; /* Espacio debajo del título */
+    font-size: 1rem; /* Tamaño de la fuente */
+    color: #666666; /* Color del texto */
+    font-family: 'Josefin Slab', serif; /* Fuente */
+    margin-right: 50rem;
+}
+
+.reportes-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.reportes-row {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-right: 50rem;
+    margin-left: 5rem;
+    
+}
+
+.reporte-card {
+    flex: 1;
+    margin: 0 10px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    
+}
+
+.reporte-card
+
+.reporte-card:hover {
+    transform: scale(1.05);
+}
+
+.reporte-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: #4EA7B0;
+    margin-top: 2.5rem;
+
+}
+
+.reporte-card h3 {
+    margin-top: 15px;
+    font-size: 24px;
+    font-family: 'Josefin Slab', serif;
+    color: #666666;
+
+}
+

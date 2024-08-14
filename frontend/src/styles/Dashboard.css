@@ -1,0 +1,94 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dashboard-container {
+    background-color: #EBE7E7; /* Color de fondo */
+    padding: 1rem;
+    width: 200vh;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0px;
+}
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 4 columnas */    gap: 20px;
+    max-width: 1200px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr); /* 4 columnas */  
+      }
+    
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.3s ease-in-out;
+    height: 100px;
+    width: 100px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas */    gap: 20px;
+    width: 100%;
+    gap: 20px;
+    max-width: 1000px;
+    margin-top: 110px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4EA7B0;
+    width: 20px;
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-family: 'Josefin Slab', serif;
+
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: #666666;
+}

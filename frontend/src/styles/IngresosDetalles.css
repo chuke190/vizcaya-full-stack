@@ -1,0 +1,69 @@
+/* IngresosDetalles.css */
+
+/* Contenedor principal */
+.bodying {
+    background-color: rgba(235, 231, 231, 0.8); /* Fondo transparente */
+    padding: 1rem;
+    width: 100vw;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column; 
+}
+
+/* Contenedor de detalles de ingresos */
+.ingresos-detalles-container {
+    background-color: #EBE7E7;
+    width: 100vw;
+    height: 200vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 0;
+}
+
+/* Estilos del título */
+.ingresos-detalles-container h1 {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* Contenedor de la tabla */
+.ingresos-table-container {
+    overflow-x: auto;
+}
+
+/* Estilos de la tabla */
+.ingresos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.ingresos-table th,
+.ingresos-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+.ingresos-table th {
+    background-color: #f4f4f4;
+    color: #333333;
+}
+
+.ingresos-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo de los mensajes de no datos */
+.ingresos-table-container p {
+    text-align: center;
+    color: #666666;
+    font-size: 16px;
+}

@@ -1,0 +1,129 @@
+/* EditUser.css */
+.edituser-body {
+    background-color: rgba(235, 231, 231, 0.8); /* Color de fondo con transparencia */    padding: 1rem;
+    width: 200vh;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0px;
+}
+
+.edituser-container {
+    max-width: 800px;
+    margin: 20px auto;
+    width: 30rem;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Permitir desplazamiento dentro del contenedor si es necesario */
+    max-height: 95vh; /* Limitar la altura máxima */
+
+}
+
+.form-cont-edit{
+    background-color: #f0f0f0;
+    color: #f0f0f0;
+    border: none;
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #257E9E;
+}
+
+.header h2 {
+    font-family: 'Jomhuria Slab', serif;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.edit-user h2 {
+    margin-bottom: 20px;
+    color: #257E9E;
+    font-family: 'Jomhuria Slab', serif;
+
+}
+
+
+.header-edU {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #257E9E;
+}
+.edit-user form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.edit-user label {
+    font-weight: bold;
+    color: #000;
+    font-family: 'Jomhuria Slab', serif;
+}
+
+.edit-user input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.edit-user button {
+    padding: 10px;
+    background-color: #5f8a99;
+    color: white;
+    font-family: 'Jomhuria Slab', serif;
+}
+
+.formuser{
+    margin-bottom: 10px;
+
+}
+
+.button-groups {
+    margin-top: 20px;
+    text-align: left;
+    margin-left: -12rem;
+}
+
+.btn-guarddar,
+.btn-canncelar {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Jomhuria Slab', serif;
+}
+
+.btn-guarddar {
+    background-color: #5f8a99;
+    color: white;
+}
+
+.btn-canncelar {
+    background-color: #E1A1A1;
+    color: white;
+}
+
+#role{
+    font-size: 12px;
+    font-family: 'Jomhuria Slab', serif;
+    margin-top: -.021rem;
+    height: 2rem;
+    width: 11rem;
+}

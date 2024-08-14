@@ -1,0 +1,93 @@
+.consentimiento-body {
+    background-color: #EBE7E7; /* Color de fondo */
+    padding: 1rem;
+    height: 110vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.consentimiento-container {
+    width: 100%; /* Ancho máximo del contenedor */
+    height: 100vh; /* Alto máximo del contenedor */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Josefin Slab', serif;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10rem;
+}
+
+.consentimiento-content {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre columnas */
+    width: 100%;
+    height: 100%;
+    gap: 20px; /* Espacio entre las columnas */
+}
+
+.consentimiento-form, .consentimiento-text {
+    flex: 1;
+    padding: 10px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 10px; /* Reducir el margen inferior */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px; /* Reducir el margen inferior */
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 11px; /* Reducir el tamaño de la fuente */
+}
+
+.consentimiento-text p {
+    margin-bottom: 10px; /* Reducir el margen inferior */
+    line-height: 1.4; /* Reducir la altura de línea */
+    font-size: 12px; /* Reducir el tamaño de la fuente */
+    font-family: 'Josefin Slab', serif;
+    text-align: justify;
+}
+
+.consentimiento-signature {
+    margin-top: 20px; /* Reducir el margen superior */
+    text-align: right;
+    font-weight: bold;
+}
+
+.title-container {
+    background-color: #66A0A5;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.title-container h1 {
+    margin: 0;
+    font-family: 'Jomhuria', cursive;
+    color: #fff;
+    font-size: 2em;
+}

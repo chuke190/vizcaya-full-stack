@@ -1,0 +1,126 @@
+.radiografias-body {
+    background-color: #EBE7E7;
+    width: 200vh;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0px;
+}
+
+.radiografias-container {
+    background-color: #D9D9D9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    margin-top: 7rem;
+    max-width: 600px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #257E9E;
+
+}
+
+.header h2 {
+    margin: 0;
+    margin-left: 1rem;
+    margin-right: .5rem;
+    color: #257E9E;
+
+}
+
+.btn-backk {
+    background: #D9D9D9;
+    border: none;
+    cursor: pointer;
+    color: #257E9E;
+    font-size: 1rem;
+    
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+}
+
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.btn-import-r, .btn-save-r,
+.btn-export-r, .btn-view-r{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Jomhuria Slab', serif;
+    display: inline-block;
+    font-size: 1rem;
+    margin-left: -4rem;
+    margin-right: 2rem;
+}
+
+.btn-view-r{
+    background-color: rgb(160, 184, 207);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Jomhuria Slab', serif;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.btn-export-r{
+    background-color: #2a718e;
+    color: white;
+}
+
+.btn-import-r{
+    background-color: #7c939b;
+    color: white;
+}
+
+.btn-save-r {
+    background-color: #5f8a99;
+    color: white;
+}
+
+.radiografias-display {
+    text-align: left;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#patient{
+    font-size: 1rem;
+    font-family: 'Jomhuria Slab', serif;
+    margin-top: .5rem;
+}

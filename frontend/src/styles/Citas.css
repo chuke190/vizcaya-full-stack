@@ -1,0 +1,135 @@
+/* Usuarios.css */
+.citas-body {
+    background-color: #EBE7E7; /* Color de fondo */
+    padding: 1rem;
+    width: 200vh;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0px;
+}
+
+.citas-container {
+    padding: 20px;
+    background-color: #D9D9D9;
+}
+
+.citas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px; 
+    margin-right: -60px;
+}
+/*
+.btn-back, .btn-add {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}*/
+
+.btn-back-cit{
+    background-color: #EBE7E7;
+    font-size: medium;
+    color: #257E9E;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 100px; 
+}
+.citas-header .btn-add-cit {
+    background-color: #D9D9D9;
+    color: #257E9E;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 150px; 
+    font-family: 'Jomhuria Slab', serif;
+
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #D9D9D9;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-family: 'Jomhuria Slab', serif;
+    margin-right: 100px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    width: 200px;
+    margin-left: 2px;
+}
+
+.citas-header .search-icon {
+    color: #ffffff;
+}
+
+
+.citas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #D9D9D9;
+}
+
+.citas-table th,
+.citas-table td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+    font-family: 'Josefin Slab', serif;
+    
+}
+
+.citas-table th {
+    background-color: #D9D9D9;
+    text-align: center;
+    font-family: 'Jomhuria Slab', serif;
+
+}
+
+.user-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.btn-editte,
+.btn-delette {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-family: 'Jomhuria Slab', serif;
+
+    }
+    
+    .btn-delette {
+    background-color: #E1A1A1;
+    color: white;
+    }
+
+    .btn-editte{
+        background-color: #5f8a99;
+        color: white;
+    }

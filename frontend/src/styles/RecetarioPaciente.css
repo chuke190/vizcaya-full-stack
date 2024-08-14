@@ -1,0 +1,272 @@
+.receta-body {
+    background-color: #EBE7E7;
+    width: 100vw;
+    height: 200vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  .receta-container {
+    width: 98%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Jomhuria Slab', serif;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 5rem;
+  }
+  
+  .receta-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .receta-form {
+    width: 45%;
+    margin-top: -1rem;
+
+    height: 80vh;
+    margin-bottom: 10px;
+    max-height: 100vh; /* Altura máxima del formulario */
+    overflow-y: auto; /* Habilitar desplazamiento vertical */
+  }
+  
+  .receta-form .receta-title {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: .9rem;
+
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: calc(100% - 10px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .info{
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: .9rem;
+    margin-right: 15rem; 
+  }
+
+  .medicine-group {
+    margin-bottom: 10px;
+  }
+  
+  
+
+  .btn-adde, .btn-del {
+    display: flex;
+    justify-content: space-between;
+    background-color: #5f8a99;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-align: justify;
+    align-items: center;
+    font-family: 'Jomhuria Slab', serif;
+    font-size: .8rem;
+    margin-top: 1-5rem;
+  }
+  .btn-adde{
+    width: 9.1rem;
+    height: 2rem;
+    margin-left: 8rem;
+    margin-top: -2rem;
+  }
+  
+  .btn-del {
+    margin-left: 2rem;
+  
+  }
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 200px;
+    margin-left: 2rem;
+  }
+  
+  .btn-group button {
+    padding: 10px 20px;
+    background-color: #5f8a99;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Jomhuria Slab', serif;
+    margin: 0 10px; /* Añade margen entre los botones */
+  }
+  
+  .btn-group button:hover {
+    background-color: #497387;
+  }
+
+  .btn-group, .buttonIm{
+    margin-top: -6rem; 
+    margin-left: -15rem;
+  }
+  
+  .receta-text-box {
+    width: 60%;
+    height: 60%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: left;
+    box-sizing: border-box;
+  }
+  
+  
+  .receta-text-box .receta-title {
+    font-size: 1rem;
+    margin-bottom: -1.5rem;
+  }
+  
+  .receta-title {
+    font-size: 1rem;
+    margin-top: -.2rem;
+    text-align: center;
+  }
+  .receta-text-box .container-form{
+    margin-top: 20px;
+  }
+
+  .container-form p {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+
+  .container-form ul {
+    font-size: 12px;
+  
+    padding-left: 20px;
+  }
+  
+  .container-form li {
+    font-size: 12px;
+  
+    padding-left: 20px;
+  }
+
+  .container-form strong {
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
+  .container-form h3{
+    font-weight: bold;
+    font-size: 12px;
+    text-align: right;
+    margin-right: 1rem;
+  }
+  
+  .container-form{
+    margin-top: -4rem;
+  }
+
+  .logoo-container {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 10px;
+  }
+  
+  .logoo-container .logoo {
+    height: 100px;
+    width: 100px;
+    margin-right: 15px;
+  }
+  
+  .subtitulos-receta {
+    margin-top: 13px;
+    margin-right: 5px;
+    font-size: 9px;
+  }
+  .container-form-sub {
+    margin-left: 1.3rem;
+    font-size: 9px;
+    text-align: right;
+  }
+  .subtiit{
+    margin-top: -4rem;
+  }
+  
+  .subtitulos-receta .subtiit .sub {
+    font-size: 9px;
+    text-align: left;
+    margin-bottom: -3px;
+    margin-top: 1px;
+  }
+
+  .subtiit .sub {
+  font-size: 9px;
+  text-transform: uppercase; /* Convertir texto a mayúsculas */
+}
+  .subtitulos-receta .dire {
+    font-size: 9px;
+    margin-left: -12.5rem;
+    margin-bottom: -13px;
+    margin-top: 2px;
+    
+  }
+  
+ 
+  .logoo-container-fecha-hora {
+    font-size: 10px;
+    margin-left: 8rem;
+    color: #1f1e1e;
+    margin-top: -2.5rem;
+    font-family: 'Josefin Slab', serif;
+  }
+  
+  @media print {
+    .logoo-container .logoo {
+      height: 50px;
+      width: 50px;
+      margin-right: 10px;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    font-family: monospace; /* Usar una fuente monoespaciada */
+    white-space: pre-wrap; /* Asegurar que los saltos de línea se mantengan */
+    overflow-wrap: break-word; /* Permitir que las palabras largas se rompan */
+    font-family: 'Josefin Slab', serif;
+
+  }
+  .uppercase {
+    text-transform: uppercase; /* Convertir texto a mayúsculas */
+}

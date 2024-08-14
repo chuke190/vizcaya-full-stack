@@ -1,0 +1,21 @@
+.navbar-inicio {
+    width: 96%;
+    height: 30px;
+    background-color: #B3C0D4;
+    padding: 26px;
+    display: flex;
+    justify-content: center; /* Centra el logo */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logoInDas {
+    height: 80px;
+    width: 200px;
+    margin-right: 50%;
+    margin-left: 50%;
+}

@@ -1,0 +1,116 @@
+/* AgregarPaciente.css */
+.addpaciente-body {
+    background-color: rgba(235, 231, 231, 0.8); /* Fondo transparente */
+    padding: 1rem;
+    width: 100vw;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.agregar-paciente-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #257E9E;
+}
+
+.form-table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #000;
+    font-family: 'abril fatface  Slab', serif;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.button-group {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.btn-view-p {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-family: 'Jomhuria Slab', serif;
+    font-size: 0.875rem;
+    background-color: #92a0a5;
+    color: white;
+}
+
+
+.btn-editt {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-family: 'Jomhuria Slab', serif;
+    font-size: 0.875rem;
+    background-color: #5f8a99;
+    color: white;
+}
+
+.btn-deletee {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-family: 'Jomhuria Slab', serif;
+    font-size: 0.875rem;
+    background-color: #E1A1A1;
+    color: white;
+}
+
+.header-subtitulo {
+    font-weight: bold;
+    color: #000;
+    font-family: 'abril fatface  Slab', serif;
+    align-items: center;
+}
+
+.btn-back-pas{
+    background-color: #EBE7E7;
+    font-size: medium;
+    color: #257E9E;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 100px; 
+    margin-left: 1rem;
+}

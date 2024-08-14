@@ -1,0 +1,159 @@
+/* Usuarios.css */
+.usuarios-body {
+    background-color: #EBE7E7; /* Color de fondo */
+    padding: 1rem;
+    width: 200vh;
+    height: 500vh;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0px;
+}
+
+.usuarios-container {
+    padding: 20px;
+    background-color: #D9D9D9;
+}
+
+.usuarios-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px; 
+    margin-right: -60px;
+}
+/*
+.btn-back, .btn-add {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}*/
+
+.btn-back-us{
+    background-color: #EBE7E7;
+    font-size: medium;
+    color: #257E9E;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 100px; 
+    margin-left: 1rem;
+}
+
+.usuarios-header .btn-add {
+    background-color: #D9D9D9;
+    color: #257E9E;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 150px; 
+    font-family: 'Jomhuria Slab', serif;
+
+}
+
+.btn-add{
+
+    margin-left: 5rem;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #D9D9D9;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    margin-left: 3rem;
+    height: 30px;
+    width: 14rem;
+    margin-right: 7rem;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    width: 200px;
+    margin-left: 2px;
+}
+
+.usuarios-header .search-icon {
+    color: #ffffff;
+}
+
+
+.usuarios-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #D9D9D9;
+}
+
+.usuarios-table th,
+.usuarios-table td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+    font-family: 'Josefin Slab', serif;
+    
+}
+
+.usuarios-table th {
+    background-color: #D9D9D9;
+    text-align: center;
+    font-family: 'Jomhuria Slab', serif;
+
+}
+
+.user-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.btn-edit-u,
+.btn-delete-u {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-family: 'Jomhuria Slab', serif;
+
+}
+
+.btn-edit-u {
+    background-color: #5f8a99;
+    color: white;
+}
+
+.btn-delete-u {
+    background-color: #E1A1A1;
+    color: white;
+}
+
+/*
+.btn-edit,
+.btn-delete {
+    background-color: #8692CB;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    }
+    
+    .btn-delete {
+    background-color: #E1A1A1;
+    }*/

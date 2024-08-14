@@ -1,0 +1,93 @@
+.admbody{
+  background-color: rgba(235, 231, 231, 0.8); /* Fondo similar al AdminDashboard */
+  padding: 1rem;
+  width: 100vw;
+  min-height: 100vh; /* Ocupa toda la altura de la página */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.admin-dashboard {
+  background-color: #EBE7E7; /* Fondo de la sección principal */
+  width: 85%;
+  height: 20rem;
+  max-width: 1200px; /* Limitar el ancho máximo */
+  padding: 20px;
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 4rem;
+  }
+  
+  .admin-dashboard h1{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 2rem;
+    font-family: 'abril fatface', serif; /* Usar la misma fuente que AdminDashboard */
+    background-color: #A1BEC7; /* Fondo similar al encabezado de AdminDashboard */
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  .dashboard-summary {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .summary-card-m {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    flex: 1;
+    width: 8rem;
+    height: 8rem;
+  }
+  
+  .summary-card-m h3 {
+    margin: 0 0 10px;
+    margin-top: 15px;
+    font-size: 24px;
+    font-family: 'Josefin Slab', serif;
+    color: #666666;
+  }
+  
+  .summary-card-m p {
+    font-size: 2rem;
+    margin: 0 0 10px;
+    font-family: 'Josefin Slab', serif;
+    color: #666666;
+  }
+  
+  .summary-card-m a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .summary-card-m a:hover {
+    text-decoration: underline;
+  }
+  
+  .btn-view-ad {
+    width: 6rem;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-family: 'Jomhuria Slab', serif;
+    font-size: 0.875rem;
+    background-color: #92a0a5;
+    color: white;
+}
+.btn-view-ad:hover {
+  background-color: #59626c; /* Cambia el color al pasar el ratón */
+}

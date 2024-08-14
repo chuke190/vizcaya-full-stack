@@ -1,0 +1,99 @@
+.addtrat-body {
+    background-color: rgba(235, 231, 231, 0.8); /* Color de fondo con transparencia */    padding: 1rem;
+    width: 200vh;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0px;
+}
+
+.agregar-tratamiento-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    height: 18rem;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Permitir desplazamiento dentro del contenedor si es necesario */
+    max-height: 90vh; /* Limitar la altura máxima */
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #257E9E;
+    margin-top: 1rem;
+}
+
+.form-table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #000;
+    font-family: 'Jomhuria Slab', serif;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.header-subtitulo {
+    font-weight: bold;
+    color: #000;
+    font-family: 'Jomhuria Slab', serif;
+    align-items: center;
+    margin-right: -20rem;
+    margin-left: -4rem;
+}
+
+.button-group {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.btn-guardar,
+.btn-cancelar {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-guardar {
+    background-color: #5f8a99;
+    color: white;
+    
+}
+
+.btn-cancelar {
+    background-color: #E1A1A1;
+    color: white;
+    margin-right: 20rem;
+}
+#tipoUsuario{
+    font-size: 1rem;
+    font-family: 'Jomhuria Slab', serif;
+    margin-top: .5rem;
+}

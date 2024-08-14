@@ -1,0 +1,127 @@
+.ver-pago-container {
+    background-color: #EBE7E7; /* Color de fondo */
+    padding: 1rem;
+    width: 2000vh;
+    height: 500vh;
+    min-height: 100vh; /* Para ocupar toda la altura de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 0px;
+    font-family: 'Jomhuria Slab', serif;
+
+}
+
+.usuarios-container{
+    padding: 10px;
+    background-color: #D9D9D9;
+}
+
+.pago-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    padding: 20px;
+    margin-top: 5rem;
+    
+}
+
+.pago-details-left, .pago-details-right {
+    width: 45%;
+}
+
+.pago-details-left p, .pago-details-right p {
+    margin: 10px 0;
+}
+
+.pago-details-left {
+    text-align: left;
+}
+
+.pago-details-right {
+    text-align: right;
+}
+
+.cita-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #D9D9D9;
+}
+
+.cita-table th, .cita-table td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+    font-family: 'Josefin Slab', serif;
+
+}
+
+.cita-table th {
+    background-color: #D9D9D9;
+    text-align: center;
+    font-family: 'Jomhuria Slab', serif;}
+
+.cita-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.historial-table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.historial-table th, .historial-table td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+    font-family: 'Josefin Slab', serif;
+}
+
+.historial-table th {
+    background-color: #f4f4f4;
+}
+
+.historial-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.btn-cobrar, .btn-back {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-cobrar {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #0e769c;
+    color: white;
+    font-family: 'Josefin Slab', serif;
+
+}
+
+.btn-back {
+    position: absolute;
+    top: 7rem;
+    left: 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color:#92a0a5;
+    color: white;
+    font-family: 'Josefin Slab', serif;
+
+}
