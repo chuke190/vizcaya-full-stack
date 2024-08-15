@@ -12,12 +12,16 @@ import mammoth from "mammoth";
 import { saveAs } from "file-saver";
 import "../styles/Odontograma.css";
 import Nav from "../components/Nav";
+import axios from "axios";
 
 const Odontograma = () => {
   const navigate = useNavigate();
   const [selectedPatient, setSelectedPatient] = useState("");
   const [odontogramaData, setOdontogramaData] = useState(null);
   const [pacientesData, setPacientesData] = useState([]);
+  const [file, setFile] = useState(null);
+
+  const upload_endpoint = "http://localhost/sisDenatal/backend2/controller/uploadDoc.php";
 
   useEffect(() => {
     const fetchPacientes = async () => {
@@ -36,29 +40,21 @@ const Odontograma = () => {
 
   const handlePatientChange = (e) => {
     setSelectedPatient(e.target.value);
-    const fetchOdontograma = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost/sisDenatal/backend2/public/index.php?action=getodontograma`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ paciente_id: e.target.value }),
-          }
-        );
-        const data = await response.json();
-        setOdontogramaData(data[0].odontograma);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    fetchOdontograma();
+    // Cargar las radiografías del paciente seleccionado desde el backend
+
+
+    // Clear odontogramaData when patient is changed
+    setOdontogramaData(null);
   };
+
+  /*  const handleInput = (e) => {
+     console.log(e.target.files[0]);
+     setFile(e.target.files[0]);
+   }; */
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
+    setFile(e.target.files[0]);
     const reader = new FileReader();
     reader.onload = async (event) => {
       const arrayBuffer = event.target.result;
@@ -85,27 +81,22 @@ const Odontograma = () => {
     }
   };
 
+  const uploadFile = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    return axios.post(upload_endpoint, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  };
+
   const handleSave = async () => {
-    if (selectedPatient && odontogramaData) {
-      const response = await fetch(
-        "http://localhost/sisDenatal/backend2/public/index.php?action=uploadfile",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            paciente_id: selectedPatient,
-          }),
-        }
-      );
-      const data = await response.json();
-      if (data.message === "exito") {
-        alert("Odontograma guardado exitosamente.");
-      } else {
-        alert("Error al guardar odontograma.");
-      }
-    }
+    if (odontogramaData && selectedPatient) {
+      let res = await uploadFile(file);
+      console.log(res);
+    };
   };
 
   return (
@@ -129,7 +120,7 @@ const Odontograma = () => {
           >
             <option value="">Seleccionar paciente</option>
             {pacientesData.map((paciente) => (
-              <option key={paciente.id} value={paciente.id}>
+              <option key={paciente.id} value={paciente.nombre}>
                 {paciente.nombre}
               </option>
             ))}
@@ -142,6 +133,7 @@ const Odontograma = () => {
           <input
             type="file"
             id="file-upload"
+            name="file-upload"
             style={{ display: "none" }}
             onChange={handleImport}
           />

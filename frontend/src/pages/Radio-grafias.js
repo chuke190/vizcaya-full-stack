@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faUpload, faDownload, faSave, faEye } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Radio-grafias.css';
 import Nav from '../components/Nav';
+import axios from 'axios';
 
 const Radiografias = () => {
     const navigate = useNavigate();
@@ -11,6 +12,9 @@ const Radiografias = () => {
     const [radiografiaData, setRadiografiaData] = useState([]);
     const [patients, setPatients] = useState([]);
     const [pacientesData, setPacientesData] = useState([]);
+    const [file, setFile] = useState(null);
+
+    const upload_endpoint = "http://localhost/sisDenatal/backend2/controller/uploadImg.php";
 
     useEffect(() => {
         const fetchPacientes = async () => {
@@ -28,14 +32,11 @@ const Radiografias = () => {
     const handlePatientChange = (e) => {
         setSelectedPatient(e.target.value);
         // Cargar las radiografías del paciente seleccionado desde el backend
-        fetch(`/api/radiografias/${e.target.value}`)
-            .then(response => response.json())
-            .then(data => setRadiografiaData(data))
-            .catch(error => console.error('Error:', error));
     };
 
     const handleImport = (e) => {
         const files = e.target.files;
+        setFile(e.target.files[0]);
         const newFiles = [];
         for (let file of files) {
             const reader = new FileReader();
@@ -65,8 +66,21 @@ const Radiografias = () => {
         linkElement.click();
     };
 
-    const handleSave = () => {
+    const uploadFile = async (file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        return axios.post(upload_endpoint, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    };
+
+    const handleSave = async () => {
         if (selectedPatient && radiografiaData) {
+            let res = await uploadFile(file);
+            console.log(res);
             
         }
     };
@@ -97,7 +111,7 @@ const Radiografias = () => {
                     <button className="btn-backk" onClick={() => navigate(-1)}>
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </button>
-                    <h2>Radiografías Pacientes</h2>
+                    <h2>Radiografías FDSFRFDDFBGDFBDB</h2>
                 </div>
                 <div className="form-group">
                     <label htmlFor="patient">Seleccionar Paciente:</label>
