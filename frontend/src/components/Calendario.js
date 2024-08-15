@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -21,17 +21,41 @@ const Calendario = () => {
     },
   ]);
 
-  const handleSelectSlot = ({ start, end }) => {
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const response = await fetch("http://localhost/sisDenatal/backend2/public/index.php?action=getcalendario");
+      const data = await response.json();
+      setEvents(
+        data.map((event) => ({
+          title: event.titulo,
+          start: new Date(event.start),
+          end: new Date(event.end),
+        }))
+      );
+    };
+    fetchEvents();
+  }, []);
+
+
+
+  const handleSelectSlot = async ({ start, end }) => {
     const title = window.prompt("Nombre de la cita:");
     if (title) {
-      setEvents([
-        ...events,
-        {
+      const response = await fetch("http://localhost/sisDenatal/backend2/public/index.php?action=addcalendario", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
           start,
           end,
-          title,
-        },
-      ]);
+        }),
+      });
+      const data = await response.json();
+      if (data.message === "exito") {
+        setEvents([...events, { title, start, end }]);
+      }
     }
   };
 

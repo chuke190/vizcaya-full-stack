@@ -1,6 +1,5 @@
 <?php
 
-require_once '../controller/upload.php';
 require_once '../config/cors_config.php';
 require_once '../config/database.php';
 require_once '../controller/UserController.php';
@@ -10,7 +9,7 @@ require_once '../controller/MedicoController.php';
 require_once '../controller/TratamientoController.php';
 require_once '../controller/CitasController.php';
 require_once '../controller/PagosController.php';
-require_once '../controller/upload.php';
+require_once '../controller/EventoController.php';
 
 
 $database = new Database();
@@ -23,16 +22,11 @@ $medico = new MedicoController($db);
 $tratamiento = new TratamientoController($db);
 $cita = new CitasController($db);
 $pagos = new PagosController($db);
-$upload = new Upload($db);
+$evento = new EventoController($db);
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
 switch ($action) {
-    // VVV Upload VVV
-    case 'uploadfile':
-        $upload->uploadFile();
-        break;
-
     // VVV Usuario VVV
     case 'getusers':
         $user->passUsers();
@@ -146,6 +140,13 @@ switch ($action) {
         break;
     case 'cobrarpago':
         $pagos->cobrarPago();
+        break;
+    // VVV Calendario VVV
+    case 'getcalendario':
+        $evento->passEventos();
+        break;
+    case 'addcalendario':
+        $evento->addEvento();
         break;
     default:
         echo json_encode(array("message" => "No se encontró la acción"));
