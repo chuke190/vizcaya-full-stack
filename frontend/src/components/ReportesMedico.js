@@ -10,7 +10,7 @@ const ReporteDoctores = () => {
     useEffect(() => {
         const FetchMedicos = async () => {
             try {
-                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=getmedicos');
+                const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getmedicos');
                 const data = await response.json();
                 setMedicos(data);
             } catch (error) {

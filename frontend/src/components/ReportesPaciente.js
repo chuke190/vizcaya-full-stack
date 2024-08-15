@@ -10,7 +10,7 @@ const ReportePacientes = () => {
     useEffect(() => {
         const fetchPacientes = async () => {
             try {
-                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=getpacientes');
+                const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getpacientes');
                 const data = await response.json();
                 setPacientesData(data);
             } catch (error) {
