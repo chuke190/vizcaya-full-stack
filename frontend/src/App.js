@@ -71,7 +71,7 @@ const App = () => {
   const [citasData, setCitasData] = useState([]);
 
   const [pagosData, setPagosData] = useState([
-    
+
   ]);
 
   const [medicos, setMedicos] = useState([]);

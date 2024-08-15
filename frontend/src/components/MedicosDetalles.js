@@ -8,7 +8,7 @@ import Nav from './Nav';
 const MedicosDetalles = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const medicos = location.state?.medicos || [];
+  const medicos = location.state? location.state.medicos : [];
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredMedicos, setFilteredMedicos] = useState([]);
 
@@ -29,16 +29,16 @@ const MedicosDetalles = () => {
     <div className="viewbody">
       <Nav />
       <div className="historial-citas-header">
-            <div className="search-bar-cv">
-                <input 
-                    type="text" 
-                    placeholder="Buscar..." 
-                    value={searchTerm} 
-                    onChange={handleSearchChange}
-                />
-                <FontAwesomeIcon icon={faSearch} className="search-icon-cv" />
-            </div>
+        <div className="search-bar-cv">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          <FontAwesomeIcon icon={faSearch} className="search-icon-cv" />
         </div>
+      </div>
       <div className="medicos-view">
         <h1>Listado de Médicos</h1>
         <p className="medicos-count">Total de Médicos Registrados: {medicos.length}</p>
@@ -59,7 +59,7 @@ const MedicosDetalles = () => {
                 <tr key={medico.id}>
                   <td>{medico.nombre}</td>
                   <td>{medico.dni}</td>
-                  <td>{medico.especialidad}</td>
+                  <td>{medico.especialidad_nombre}</td>
                   <td>{medico.direccion}</td>
                   <td>{medico.email}</td>
                   <td>{medico.telefono}</td>

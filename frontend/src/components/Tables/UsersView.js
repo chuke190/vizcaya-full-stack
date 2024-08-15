@@ -12,10 +12,11 @@ import Nav from "../Nav";
 const UsersView = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { users: initialUsers = [] } = location.state || {};
+
+  const users = location.state ? location.state.users : [];
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState(initialUsers);
+  const [filteredUsers, setFilteredUsers] = useState(users);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,13 +25,13 @@ const UsersView = () => {
 
   useEffect(() => {
     setFilteredUsers(
-      initialUsers.filter(
+      users.filter(
         (user) =>
           user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
           user.email.toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-  }, [searchTerm, initialUsers]);
+  }, [searchTerm, users]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);

@@ -61,7 +61,7 @@ const CitasView = () => {
               citasData
                 .filter(
                   (cita) =>
-                    cita.tratamiento
+                    cita.tratamiento_nombre
                       .toLowerCase()
                       .includes(searchTerm.toLowerCase()) ||
                     cita.medico
