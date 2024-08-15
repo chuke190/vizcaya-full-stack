@@ -4,13 +4,12 @@ require_once '../config/cors_config.php';
 
 class Pagos {
     private $conn;
-    private $table_name = "pagos";
+    private $table_name = "pago";
 
     public $id;
-    public $paciente_id;
-    public $tratamiento_id;
-    public $enfermedad;
     public $fecha;
+    public $paciente;
+    public $tratamiento;
     public $hora;
     public $costo;
     public $pagado;

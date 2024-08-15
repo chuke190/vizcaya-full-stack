@@ -50,7 +50,7 @@ const Login = ({ setLoggedInUser }) => {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/controller/AuthController.php', {
+        const response = await fetch('http://localhost/sisDenatal/backend2/controller/AuthController.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +64,9 @@ const Login = ({ setLoggedInUser }) => {
         const data = await response.json();
 
         if (data.message === "exito") {
+            setAuth(true);
             setLoggedInUser(data.user);
+            localStorage.setItem('usuarioLogged', JSON.stringify(data.user));
             navigate('/dashboard');
         } else {
             setMensaje('Credenciales incorrectas.');

@@ -10,6 +10,7 @@ require_once '../controller/MedicoController.php';
 require_once '../controller/TratamientoController.php';
 require_once '../controller/CitasController.php';
 require_once '../controller/PagosController.php';
+require_once '../controller/upload.php';
 
 
 $database = new Database();
@@ -22,13 +23,14 @@ $medico = new MedicoController($db);
 $tratamiento = new TratamientoController($db);
 $cita = new CitasController($db);
 $pagos = new PagosController($db);
+$upload = new Upload($db);
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
 switch ($action) {
     // VVV Upload VVV
     case 'uploadfile':
-        uploadFile();
+        $upload->uploadFile();
         break;
 
     // VVV Usuario VVV
@@ -142,7 +144,9 @@ switch ($action) {
     case 'deletepago':
         $pagos->deletePago();
         break;
-
+    case 'cobrarpago':
+        $pagos->cobrarPago();
+        break;
     default:
         echo json_encode(array("message" => "No se encontró la acción"));
         break;

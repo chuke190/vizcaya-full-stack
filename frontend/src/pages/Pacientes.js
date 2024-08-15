@@ -21,7 +21,7 @@ const Pacientes = ({ pacientesData, setPacientesData }) => {
     const fetchPacientes = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getpacientes"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=getpacientes"
         );
         const data = await response.json();
         setPacientesData(data);
@@ -50,7 +50,7 @@ const Pacientes = ({ pacientesData, setPacientesData }) => {
       const deletePaciente = async () => {
         try {
           const response = await fetch(
-            "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=deletepaciente",
+            "http://localhost/sisDenatal/backend2/public/index.php?action=deletepaciente",
             {
               method: "POST",
               headers: {
@@ -118,7 +118,6 @@ const Pacientes = ({ pacientesData, setPacientesData }) => {
           <table className="usuarios-table">
             <thead>
               <tr>
-                <th>Foto</th>
                 <th>Encargado</th>
                 <th>Nombre</th>
                 <th>Email</th>
@@ -139,17 +138,6 @@ const Pacientes = ({ pacientesData, setPacientesData }) => {
                 )
                 .map((paciente) => (
                   <tr key={paciente.id}>
-                    <td>
-                      {paciente.photo ? (
-                        <img
-                          src={paciente.photo}
-                          alt={paciente.nombre}
-                          className="user-photo"
-                        />
-                      ) : (
-                        <span>{paciente.nombre}</span>
-                      )}
-                    </td>
                     <td>{paciente.encargado}</td>
                     <td>{paciente.nombre}</td>
                     <td>{paciente.email}</td>

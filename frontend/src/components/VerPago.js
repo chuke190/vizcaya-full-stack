@@ -14,6 +14,7 @@ const VerPago = ({ pagosData, citasData, usuariosData, setPagosData, setIngresos
     const pagoId = parseInt(id, 10);
     const pago = pagosData.find(p => p.id === pagoId);
     if (!pago) {
+        console.log(pago)
         return <div>Pago no encontrado</div>;
     }
 
@@ -122,10 +123,9 @@ const VerPago = ({ pagosData, citasData, usuariosData, setPagosData, setIngresos
             <Nav />
             <div className="pago-details">
                 <div className="pago-details-left">
-                    <p><strong>Paciente:</strong> {pago.paciente}</p>
-                    <p><strong>Enfermedad:</strong> {pago.enfermedad}</p>
-                    <p><strong>Tratamiento:</strong> {pago.tratamiento}</p>
-                    <p><strong>Médico:</strong> {medico}</p>
+                    <p><strong>Paciente:</strong> {pago.paciente_nombre}</p>
+                    <p><strong>Tratamiento:</strong> {pago.tratamiento_nombre}</p>
+                    <p><strong>Médico:</strong> {cita.medico_nombre}</p>
                 </div>
                 <div className="pago-details-right">
                     <p><strong>Estado:</strong> {estadoCita}</p>
@@ -155,7 +155,7 @@ const VerPago = ({ pagosData, citasData, usuariosData, setPagosData, setIngresos
                                 <td>{cita.hora}</td>
                                 <td>{pago.costo}</td>
                                 <td>{pago.pagado}</td>
-                                <td>{usuarioRecibio.nombre ? `${usuarioRecibio.nombre} (${usuarioRecibio.rol})` : 'Desconocido'}</td>
+                                <td>{pago.recibidoPor}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -164,19 +164,6 @@ const VerPago = ({ pagosData, citasData, usuariosData, setPagosData, setIngresos
                 <p>No hay detalles de la cita.</p>
             )}
 
-            {pago.saldo > 0 || estadoCita === 'Pendiente' ? (
-                <div className="cobrar-section">
-                    <input
-                        type="number"
-                        value={montoACobrar}
-                        onChange={(e) => setMontoACobrar(e.target.value)}
-                        placeholder="Monto a cobrar"
-                    />
-                    <button className="btn-cobrar" onClick={handleCobrar}>Cobrar</button>
-                </div>
-            ) : (
-                <p>No hay saldo pendiente para cobrar o la cita no está pendiente.</p>
-            )}
             <button className="btn-back" onClick={handleBack}>Regresar a Pagos</button>
         </div>
     );

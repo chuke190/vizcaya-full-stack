@@ -35,7 +35,7 @@ const EditarEspecialidad = ({ especialidadesData, setEspecialidadesData }) => {
       return;
     }
     const response = await fetch(
-      `http://localhost/vizcaya-full-stack/backend2/public/index.php?action=updateespecialidad`,
+      `http://localhost/sisDenatal/backend2/public/index.php?action=updateespecialidad`,
       {
         method: "PUT",
         headers: {

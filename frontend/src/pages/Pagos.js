@@ -5,26 +5,34 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Pagos.css';
 import Nav from '../components/Nav';
 
-const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, usuarioLogueado }) => {
+const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, loggedInUser }) => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [filteredPagos, setFilteredPagos] = useState([]);
 
+
     useEffect(() => {
-        // Simula una carga de datos inicial
-        setTimeout(() => {
-            setIsLoading(false);
-            setFilteredPagos(pagosData);
-        }, );
-    }, [pagosData]);
+        const fetchPagos = async () => {
+            try {
+                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=getpagos');
+                const data = await response.json();
+                setPagosData(data);
+                console.log(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+        fetchPagos();
+    }, [setPagosData]);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
         setFilteredPagos(
             pagosData.filter(pago =>
-                pago.paciente.toLowerCase().includes(e.target.value.toLowerCase()) ||
-                pago.tratamiento.toLowerCase().includes(e.target.value.toLowerCase())
+                pago.paciente_nombre.toLowerCase().includes(e.target.value.toLowerCase()) ||
+                pago.tratamiento_nombre.toLowerCase().includes(e.target.value.toLowerCase())
             )
         );
     };
@@ -39,34 +47,67 @@ const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, usuarioLoguea
             alert(`No se encontró una cita con el id: ${id}`);
             return;
         }
-        navigate(`/ver-pago/${id}`, { state: { citaSeleccionada, usuarioLogueado, usuariosData } });
+        navigate(`/ver-pago/${id}`, { state: { citaSeleccionada, loggedInUser, usuariosData } });
     };
 
     const handleDeletePago = (id) => {
-        if (window.confirm('¿Estás seguro de que deseas eliminar este pago? Esta acción no se puede deshacer.')) {
-            setPagosData(prevState => prevState.filter(pago => pago.id !== id));
-            alert("Pago eliminado exitosamente.");
+        const pago = pagosData.find(pago => pago.id === id);
+        if (pago.saldo > 0) {
+            alert('No se puede eliminar un pago que aún tiene saldo pendiente.');
+            return;
+        } else {
+            if (window.confirm('¿Está seguro que desea eliminar este pago?')) {
+                fetch('http://localhost/sisDenatal/backend2/public/index.php?action=deletepago', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message === 'exito') {
+                            alert('Pago eliminado exitosamente.');
+                            setPagosData(prevState => prevState.filter(pago => pago.id !== id));
+                        } else {
+                            alert('Ocurrió un error al eliminar el pago. Intente nuevamente.');
+                        }
+                    });
+            }
         }
     };
 
-    const handleCobrarPago = (id) => {
+    const handleCobrarPago = async (id) => {
         const pago = pagosData.find(pago => pago.id === id);
         if (pago && pago.saldo > 0) {
             const amountToPay = prompt(`El saldo restante es $${pago.saldo}. Ingrese el monto a pagar:`);
             const amountPaid = parseFloat(amountToPay);
     
             if (!isNaN(amountPaid) && amountPaid > 0 && amountPaid <= pago.saldo) {
-                const updatedPagos = pagosData.map(p =>
-                    p.id === id ? { 
-                        ...p, 
-                        saldo: (parseFloat(p.saldo) - amountPaid).toFixed(2), 
-                        pagado: (parseFloat(p.pagado) + amountPaid).toFixed(2), 
-                        recibidoPor: usuarioLogueado.nombre 
-                    } : p
-                );
-                setPagosData(updatedPagos);
-                alert(`Pago de $${amountPaid} realizado exitosamente.`);
-                navigate(`/cobrar-pago/${id}`);
+                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=cobrarpago', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                        pagado: amountPaid,
+                        saldo: pago.saldo
+                    }),
+                });
+                const data = await response.json();
+                console.log(data.message);
+                if (data.message === 'exito') {
+                    alert('Pago realizado exitosamente.');
+                    setPagosData(prevState => prevState.map(pago => {
+                        if (pago.id === id) {
+                            return { ...pago, pagado: parseFloat(pago.pagado) + amountPaid, saldo: parseFloat(pago.saldo) - amountPaid };
+                        }
+                        return pago;
+                    }));
+                } else {
+                    alert('Ocurrió un error al realizar el pago. Intente nuevamente.');
+                }
             } else {
                 alert('Monto ingresado no válido o excede el saldo pendiente.');
             }
@@ -123,7 +164,6 @@ const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, usuarioLoguea
                                 <th>#</th>
                                 <th>Paciente</th>
                                 <th>Tratamiento</th>
-                                <th>Enfermedad</th>
                                 <th>Fecha</th>
                                 <th>Hora</th>
                                 <th>Costo</th>
@@ -132,12 +172,11 @@ const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, usuarioLoguea
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredPagos.map(pago => (
+                            {pagosData.map(pago => (
                                 <tr key={pago.id}>
                                     <td>{pago.id}</td>
-                                    <td>{pago.paciente}</td>
-                                    <td>{pago.tratamiento}</td>
-                                    <td>{pago.enfermedad}</td>
+                                    <td>{pago.paciente_nombre}</td>
+                                    <td>{pago.tratamiento_nombre}</td>
                                     <td>{pago.fecha}</td>
                                     <td>{pago.hora}</td>
                                     <td>{pago.costo}</td>
@@ -151,7 +190,7 @@ const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, usuarioLoguea
                             ))}
                         </tbody>
                     </table>
-                    {filteredPagos.length === 0 && <p>No se encontraron pagos que coincidan con la búsqueda.</p>}
+                    {pagosData.length === 0 && <p>No se encontraron pagos que coincidan con la búsqueda.</p>}
                 </div>
             )}
         </div>

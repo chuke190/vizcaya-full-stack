@@ -19,7 +19,7 @@ const Tratamientos = ({ tratamientosData, setTratamientosData }) => {
     const fetchTratamientos = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=gettratamientos"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=gettratamientos"
         );
         const data = await response.json();
         setTratamientosData(data);
@@ -47,7 +47,7 @@ const Tratamientos = ({ tratamientosData, setTratamientosData }) => {
       window.confirm("¿Estás seguro de que deseas eliminar este tratamiento?")
     ) {
       const response = await fetch(
-        "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=deletetratamiento",
+        "http://localhost/sisDenatal/backend2/public/index.php?action=deletetratamiento",
         {
           method: "POST",
           headers: {

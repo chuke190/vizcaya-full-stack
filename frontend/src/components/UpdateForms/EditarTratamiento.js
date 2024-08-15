@@ -23,7 +23,7 @@ const EditarTratamiento = ({ tratamientosData, setTratamientosData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=updatetratamiento', {
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=updatetratamiento', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

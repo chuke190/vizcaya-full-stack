@@ -18,7 +18,7 @@ const Citas = ({ citasData, setCitasData }) => {
     const fetchCitas = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getcitas"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=getcitas"
         );
         const data = await response.json();
         setCitasData(data);
@@ -46,7 +46,7 @@ const Citas = ({ citasData, setCitasData }) => {
       const deleteCita = async () => {
         try {
           const response = await fetch(
-            "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=deletecita",
+            "http://localhost/sisDenatal/backend2/public/index.php?action=deletecita",
             {
               method: "POST",
               headers: {

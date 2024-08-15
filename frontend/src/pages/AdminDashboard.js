@@ -19,7 +19,7 @@ const AdminDashboard = ({ pacientes, citas, ingresosArray, medicos, users }) => 
   useEffect(() => {
     const countPacientes = async () => {
       try {
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=countpacientes');
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=countpacientes');
         const data = await response.json();
         setPacientesCount(data["COUNT(*)"]);
       } catch (error) {
@@ -32,7 +32,7 @@ const AdminDashboard = ({ pacientes, citas, ingresosArray, medicos, users }) => 
   useEffect(() => {
     const countCitas = async () => {
       try {
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=countcitas');
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=countcitas');
         const data = await response.json();
         setCitasCount(data["COUNT(*)"]);
       } catch (error) {
@@ -45,7 +45,7 @@ const AdminDashboard = ({ pacientes, citas, ingresosArray, medicos, users }) => 
   useEffect(() => {
     const countMedicos = async () => {
       try {
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=countmedicos');
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=countmedicos');
         const data = await response.json();
         setMedicosCount(data["COUNT(*)"]);
       } catch (error) {
@@ -58,7 +58,7 @@ const AdminDashboard = ({ pacientes, citas, ingresosArray, medicos, users }) => 
   useEffect(() => {
     const countUsuarios = async () => {
       try {
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=countusers');
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=countusers');
         const data = await response.json();
         setUsuariosCount(data["COUNT(*)"]);
       } catch (error) {

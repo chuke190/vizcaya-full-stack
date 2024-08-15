@@ -10,12 +10,25 @@ require_once '../models/Odontograma.php';
 
 class Upload
 {
+
+    private $conn;
+    private $radiografia;
+    private $odontograma;
+
+    public function __construct($db)
+    {
+        $this->conn = $db;
+        $this->radiografia = new Radiografia($db);
+        $this->odontograma = new Odontograma($db);
+    }
+
     function uploadFile()
     {
         $data = json_decode(file_get_contents("php://input"));
         $this->paciente_id = $data->paciente_id;
+        $this->archivoName = $data->archivoName;
         if (isset($_FILES['file'])) {
-            $file = $_FILES['file'];
+            $file = $_FILES['file']['name'];
             $uploadDir = '../files/';
             $uploadFile = $uploadDir . basename($file['name']);
 

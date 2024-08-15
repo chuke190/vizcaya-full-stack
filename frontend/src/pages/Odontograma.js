@@ -23,7 +23,7 @@ const Odontograma = () => {
     const fetchPacientes = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2//public/index.php?action=getpacientes"
+          "http://localhost/sisDenatal/backend2//public/index.php?action=getpacientes"
         );
         const data = await response.json();
         setPacientesData(data);
@@ -39,7 +39,7 @@ const Odontograma = () => {
     const fetchOdontograma = async () => {
       try {
         const response = await fetch(
-          `http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getodontograma`,
+          `http://localhost/sisDenatal/backend2/public/index.php?action=getodontograma`,
           {
             method: "POST",
             headers: {
@@ -88,7 +88,7 @@ const Odontograma = () => {
   const handleSave = async () => {
     if (selectedPatient && odontogramaData) {
       const response = await fetch(
-        "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=uploadfile",
+        "http://localhost/sisDenatal/backend2/public/index.php?action=uploadfile",
         {
           method: "POST",
           headers: {

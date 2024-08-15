@@ -22,7 +22,7 @@ const AgregarTratamiento = ({ tratamientosData, setTratamientosData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=addtratamiento",
+      "http://localhost/sisDenatal/backend2/public/index.php?action=addtratamiento",
       {
         method: "POST",
         headers: {

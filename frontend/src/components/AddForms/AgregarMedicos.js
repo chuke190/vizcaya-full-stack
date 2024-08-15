@@ -21,7 +21,7 @@ const AgregarMedico = ({ medicos, setMedicos }) => {
     useEffect(() => {
         const fetchEspecialidades = async () => {
             try {
-                const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getespecialidades');
+                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=getespecialidades');
                 const data = await response.json();
                 setEspecialidades(data);
             } catch (error) {
@@ -49,7 +49,7 @@ const AgregarMedico = ({ medicos, setMedicos }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=addmedico', {
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=addmedico', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

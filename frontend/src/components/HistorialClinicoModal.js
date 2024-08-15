@@ -32,13 +32,6 @@ const HistorialClinicoModal = ({ paciente, onClose }) => {
                         <label>Teléfono:</label>
                         <p>{paciente.telefono}</p>
                     </div>
-                    <div className="form-group">
-                        <label>Foto:</label>
-                        {paciente.photo ? 
-                            <img src={paciente.photo} alt="Foto" className="user-photo" /> :
-                            <span>No disponible</span>
-                        }
-                    </div>
                     <h3>Historial Clínico</h3>
                     <div className="form-group checkbox-group">
                         <label>Bajo Tratamiento Médico:</label>

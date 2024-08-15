@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/AgregarCitas.css';
 
-const AgregarCitas = ({ setCitasData }) => {
+const AgregarCitas = ({ setCitasData, loggedInUser }) => {
     const navigate = useNavigate();
     const [citaData, setCitaData] = useState({
         tratamiento: '',
@@ -25,7 +25,7 @@ const AgregarCitas = ({ setCitasData }) => {
     useEffect(() => {
         const fetchMedicos = async () => {
             try {
-                const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getmedicos');
+                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=getmedicos');
                 const data = await response.json();
                 setMedicos(data);
             } catch (error) {
@@ -38,7 +38,7 @@ const AgregarCitas = ({ setCitasData }) => {
     useEffect(() => {
         const fetchPacientes = async () => {
             try {
-                const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getpacientes');
+                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=getpacientes');
                 const data = await response.json();
                 setPacientes(data);
             } catch (error) {
@@ -51,7 +51,7 @@ const AgregarCitas = ({ setCitasData }) => {
     useEffect(() => {
         const fetchTratamientos = async () => {
             try {
-                const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=gettratamientos');
+                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=gettratamientos');
                 const data = await response.json();
                 setTratamientos(data);
             } catch (error) {
@@ -63,10 +63,33 @@ const AgregarCitas = ({ setCitasData }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setCitaData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+
+        if (name === "tratamiento") {
+            const tratamientoSeleccionado = tratamientos.find(
+                (trat) => trat.id === parseInt(value)
+            );
+
+            console.log(tratamientoSeleccionado);
+
+            if (tratamientoSeleccionado) {
+                setCitaData((prevState) => ({
+                    ...prevState,
+                    [name]: value,
+                    costo: tratamientoSeleccionado.costo,
+                }));
+            } else {
+                setCitaData((prevState) => ({
+                    ...prevState,
+                    [name]: value,
+                    costo: "",
+                }));
+            }
+        } else {
+            setCitaData((prevState) => ({
+                ...prevState,
+                [name]: value,
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -75,7 +98,7 @@ const AgregarCitas = ({ setCitasData }) => {
             alert('Por favor, completa todos los campos.');
             return;
         }
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=addcita', {
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=addcita', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -89,7 +112,9 @@ const AgregarCitas = ({ setCitasData }) => {
                 estado: citaData.estado,
                 pago: citaData.pago,
                 costo: citaData.costo,
-                pagado: citaData.pagado
+                pagado: citaData.pagado,
+                //recibidoPor: localStorage.getItem('usuarioLogged')
+                recibidoPor: loggedInUser.nombre
             })
         });
         const data = await response.json();
@@ -179,7 +204,7 @@ const AgregarCitas = ({ setCitasData }) => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="costo">Costo:</label>
-                            <input type="number" id="costo" name="costo" value={citaData.costo} onChange={handleChange} required />
+                            <input type="number" id="costo" name="costo" value={citaData.costo} onChange={handleChange} required disabled />
                         </div>
                         <div className="form-group">
                             <label htmlFor="pagado">Pagado:</label>

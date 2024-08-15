@@ -22,7 +22,7 @@ const AgregarEspecialidades = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=addespecialidad",
+      "http://localhost/sisDenatal/backend2/public/index.php?action=addespecialidad",
       {
         method: "POST",
         headers: {

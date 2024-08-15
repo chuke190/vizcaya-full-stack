@@ -24,7 +24,7 @@ const RecetaPaciente = ({ medicos, setMedicos }) => {
     const fetchMedicos = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getmedicos"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=getmedicos"
         );
         const data = await response.json();
         setMedicos(data);
@@ -371,7 +371,7 @@ const RecetaPaciente = ({ medicos, setMedicos }) => {
                   <div className="form-group">
                     <label htmlFor={`schedule${index}`}>Horario:</label>
                     <input
-                      type="time"
+                      type="text"
                       id={`schedule${index}`}
                       name="schedule"
                       value={medicine.schedule}
@@ -459,8 +459,8 @@ const RecetaPaciente = ({ medicos, setMedicos }) => {
                 <strong>NOMBRE:</strong> {patientName}
               </p>
               <p>
-                <strong>SEXO:</strong> {sexo}____________<strong>EDAD:</strong>{" "}
-                {edad}____________<strong>FECHA DE NACIMIENTO:</strong>{" "}
+                <strong>SEXO:</strong> {sexo} <strong>EDAD:</strong>{" "}
+                {edad} <strong>FECHA DE NACIMIENTO:</strong>{" "}
                 {fechanac}
               </p>
               <p>
@@ -469,7 +469,7 @@ const RecetaPaciente = ({ medicos, setMedicos }) => {
               <ul>
                 {medicines.map((medicine, index) => (
                   <li key={index}>
-                    <strong>{medicine.nombre}</strong> - {medicine.dosage} cada{" "}
+                    <strong>{medicine.name}</strong> - {medicine.dosage} cada{" "}
                     {medicine.schedule} hrs
                   </li>
                 ))}

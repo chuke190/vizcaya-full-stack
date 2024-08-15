@@ -66,7 +66,7 @@ const EditUser = ({ users, setUsers }) => {
     console.log("Datos enviados:", userData);
 
     const response = await fetch(
-      "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=updateuser",
+      "http://localhost/sisDenatal/backend2/public/index.php?action=updateuser",
       {
         method: "PUT",
         headers: {

@@ -19,7 +19,7 @@ const Especialidades = ({ especialidadesData, setEspecialidadesData }) => {
     const fetchEspecialidades = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getespecialidades"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=getespecialidades"
         );
         const data = await response.json();
         setEspecialidadesData(data);
@@ -49,7 +49,7 @@ const Especialidades = ({ especialidadesData, setEspecialidadesData }) => {
       const deleteEspecialidad = async () => {
         try {
           const response = await fetch(
-            "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=deleteespecialidad",
+            "http://localhost/sisDenatal/backend2/public/index.php?action=deleteespecialidad",
             {
               method: "POST",
               headers: {
@@ -89,7 +89,7 @@ const Especialidades = ({ especialidadesData, setEspecialidadesData }) => {
       const deleteAllEspecialidades = async () => {
         try {
           const response = await fetch(
-            "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=dropallesp",
+            "http://localhost/sisDenatal/backend2/public/index.php?action=dropallesp",
             {
               method: "DELETE",
             }

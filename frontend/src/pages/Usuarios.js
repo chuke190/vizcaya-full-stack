@@ -26,7 +26,7 @@ const Usuarios = ({ users, setUsers, setUsuarioLogueado, pagosData }) => {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getusers"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=getusers"
         );
         const data = await response.json();
         setUsers(data);
@@ -35,9 +35,7 @@ const Usuarios = ({ users, setUsers, setUsuarioLogueado, pagosData }) => {
         console.error("Error:", error);
       }
     };
-
     fetchUsers();
-    console.log(users);
   }, [setUsers]);
 
   useEffect(() => {
@@ -67,7 +65,7 @@ const Usuarios = ({ users, setUsers, setUsuarioLogueado, pagosData }) => {
       const deleteUser = async () => {
         try {
           const response = await fetch(
-            "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=deleteuser",
+            "http://localhost/sisDenatal/backend2/public/index.php?action=deleteuser",
             {
               method: "POST",
               headers: {
@@ -122,7 +120,6 @@ const Usuarios = ({ users, setUsers, setUsuarioLogueado, pagosData }) => {
           <table className="usuarios-table">
             <thead>
               <tr>
-                <th>Foto</th>
                 <th>Rol</th>
                 <th>Nombre</th>
                 <th>Email</th>
@@ -133,13 +130,6 @@ const Usuarios = ({ users, setUsers, setUsuarioLogueado, pagosData }) => {
             <tbody>
               {filteredUsers.map((user) => (
                 <tr key={user.id}>
-                  <td>
-                    <img
-                      src={user.photo}
-                      alt={user.nombre}
-                      className="user-photo"
-                    />
-                  </td>
                   <td>{user.rol}</td>
                   <td>{user.nombre}</td>
                   <td>{user.email}</td>

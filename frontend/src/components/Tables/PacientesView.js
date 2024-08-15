@@ -56,7 +56,6 @@ const PacientesView = () => {
               <th>Nombre</th>
               <th>Email</th>
               <th>Teléfono</th>
-              <th>Foto</th>
               <th></th>
             </tr>
           </thead>
@@ -68,17 +67,6 @@ const PacientesView = () => {
                   <td>{paciente.nombre}</td>
                   <td>{paciente.email}</td>
                   <td>{paciente.telefono}</td>
-                  <td>
-                    {paciente.photo ? (
-                      <img
-                        src={paciente.photo}
-                        alt="Foto"
-                        className="user-photo"
-                      />
-                    ) : (
-                      "No disponible"
-                    )}
-                  </td>
                   <td>
                     <button
                       className="btn-details"

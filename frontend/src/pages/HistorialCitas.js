@@ -12,7 +12,7 @@ const HistorialCitas = ({ citasData, setCitasData }) => {
     useEffect(() => {
         const fetchCitas = async () => {
             try {
-                const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getcitas');
+                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=getcitas');
                 const data = await response.json();
                 setCitasData(data);
             } catch (error) {

@@ -39,7 +39,7 @@ const EditarPaciente = ({ pacientesData, setPacientesData }) => {
             return;
         }
 
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=updatepaciente', {
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=updatepaciente', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

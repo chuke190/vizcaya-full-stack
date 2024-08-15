@@ -16,7 +16,10 @@ class PagosController {
     }
 
     public function passPagos() {
-        $query = "SELECT * FROM pagos";
+        $query = "SELECT pag.*, p.nombre as paciente_nombre, t.tratamiento as
+        tratamiento_nombre FROM pago pag JOIN paciente p ON pag.paciente = p.id
+        JOIN tratamiento t ON pag.tratamiento = t.id;";
+
         $stmt = $this->conn->prepare($query);
 
         try {
@@ -24,18 +27,17 @@ class PagosController {
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($result);
         } catch (PDOException $e) {
-            echo json_encode(array("message" => "fallo"));
+            echo json_encode(array("message" => "fallo" . $e));
         }
     }
 
     public function addPago() {
         $data = json_decode(file_get_contents("php://input"));
-        $query = "INSERT INTO pagos (paciente_id, tratamiento_id, enfermedad, fecha, hora, costo, pagado, saldo, recibidoPor)
-                  VALUES (:paciente_id, :tratamiento_id, :enfermedad, :fecha, :hora, :costo, :pagado, :saldo, :recibidoPor)";
+        $query = "INSERT INTO pagos (paciente, tratamiento, fecha, hora, costo, pagado, saldo, recibidoPor)
+                  VALUES (:paciente, :tratamiento, :fecha, :hora, :costo, :pagado, :saldo, :recibidoPor)";
 
-        $this->pagos->paciente_id = $data->paciente_id;
-        $this->pagos->tratamiento_id = $data->tratamiento_id;
-        $this->pagos->enfermedad = $data->enfermedad;
+        $this->pagos->paciente = $data->paciente;
+        $this->pagos->tratamiento = $data->tratamiento;
         $this->pagos->fecha = $data->fecha;
         $this->pagos->hora = $data->hora;
         $this->pagos->costo = $data->costo;
@@ -45,9 +47,8 @@ class PagosController {
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(':paciente_id', $this->pagos->paciente_id);
-        $stmt->bindParam(':tratamiento_id', $this->pagos->tratamiento_id);
-        $stmt->bindParam(':enfermedad', $this->pagos->enfermedad);
+        $stmt->bindParam(':paciente', $this->pagos->paciente);
+        $stmt->bindParam(':tratamiento', $this->pagos->tratamiento);
         $stmt->bindParam(':fecha', $this->pagos->fecha);
         $stmt->bindParam(':hora', $this->pagos->hora);
         $stmt->bindParam(':costo', $this->pagos->costo);
@@ -64,12 +65,33 @@ class PagosController {
 
     public function deletePago() {
         $data = json_decode(file_get_contents("php://input"));
-        $query = "DELETE FROM pagos WHERE id = :id";
+        $query = "DELETE FROM pago WHERE id = :id";
 
         $this->pagos->id = $data->id;
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $this->pagos->id);
+
+        if ($stmt->execute()) {
+            echo json_encode(array("message" => "exito"));
+        } else {
+            echo json_encode(array("message" => "fallo"));
+        }
+    }
+
+    public function cobrarPago() {
+        $data = json_decode(file_get_contents("php://input"));
+        $query = "UPDATE pago SET saldo = saldo - :pagado, pagado = pagado + :pagado WHERE id = :id";
+
+        $this->pagos->id = $data->id;
+        $this->pagos->pagado = $data->pagado;
+        $this->pagos->saldo = $data->saldo;
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':id', $this->pagos->id);
+        $stmt->bindParam(':pagado', $this->pagos->pagado);
+        $stmt->bindParam(':saldo', $this->pagos->saldo);
 
         if ($stmt->execute()) {
             echo json_encode(array("message" => "exito"));

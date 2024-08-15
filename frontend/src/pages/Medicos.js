@@ -18,7 +18,7 @@ const Medicos = ({ medicos, setMedicos }) => {
     const fetchMedicos = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getmedicos"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=getmedicos"
         );
         const data = await response.json();
         setMedicos(data); 
@@ -57,7 +57,7 @@ const Medicos = ({ medicos, setMedicos }) => {
       const deleteMedico = async () => {
         try {
           const response = await fetch(
-            "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=deletemedico",
+            "http://localhost/sisDenatal/backend2/public/index.php?action=deletemedico",
             {
               method: "POST",
               headers: {

@@ -31,7 +31,7 @@ const EditarCita = ({ citasData, setCitasData }) => {
     const fetchMedicos = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getmedicos"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=getmedicos"
         );
         const data = await response.json();
         setMedicos(data);
@@ -46,7 +46,7 @@ const EditarCita = ({ citasData, setCitasData }) => {
     const fetchPacientes = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=getpacientes"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=getpacientes"
         );
         const data = await response.json();
         setPacientes(data);
@@ -61,7 +61,7 @@ const EditarCita = ({ citasData, setCitasData }) => {
     const fetchTratamientos = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=gettratamientos"
+          "http://localhost/sisDenatal/backend2/public/index.php?action=gettratamientos"
         );
         const data = await response.json();
         setTratamientos(data);
@@ -80,10 +80,33 @@ const EditarCita = ({ citasData, setCitasData }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCitaData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    if (name === "tratamiento") {
+      const tratamientoSeleccionado = tratamientos.find(
+        (trat) => trat.id === parseInt(value)
+      );
+
+      console.log(tratamientoSeleccionado);
+
+      if (tratamientoSeleccionado) {
+        setCitaData((prevState) => ({
+          ...prevState,
+          [name]: value,
+          costo: tratamientoSeleccionado.costo,
+        }));
+      } else {
+        setCitaData((prevState) => ({
+          ...prevState,
+          [name]: value,
+          costo: "",
+        }));
+      }
+    } else {
+      setCitaData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -91,7 +114,7 @@ const EditarCita = ({ citasData, setCitasData }) => {
     const updateCita = async () => {
       try {
         const response = await fetch(
-          "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=updatecita",
+          "http://localhost/sisDenatal/backend2/public/index.php?action=updatecita",
           {
             method: "POST",
             headers: {
@@ -154,6 +177,7 @@ const EditarCita = ({ citasData, setCitasData }) => {
                 value={citaData.tratamiento}
                 onChange={handleChange}
                 required
+                disabled
               >
                 <option value="">Seleccionar tratamiento</option>
                 {tratamientos.map((trat) => (
@@ -258,6 +282,7 @@ const EditarCita = ({ citasData, setCitasData }) => {
                 value={citaData.costo}
                 onChange={handleChange}
                 required
+                disabled
               />
             </div>
             <div className="form-group">

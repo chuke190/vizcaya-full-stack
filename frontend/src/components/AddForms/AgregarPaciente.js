@@ -62,7 +62,7 @@ const AgregarPaciente = ({ setPacientesData }) => {
     }
     console.log(pacienteData);
     const response = await fetch(
-      "http://localhost/vizcaya-full-stack/backend2/public/index.php?action=addpaciente",
+      "http://localhost/sisDenatal/backend2/public/index.php?action=addpaciente",
       {
         method: "POST",
         headers: {
@@ -201,22 +201,6 @@ const AgregarPaciente = ({ setPacientesData }) => {
                   onChange={handleChange}
                   required
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="photo">Foto:</label>
-                <input
-                  type="file"
-                  id="photo"
-                  name="photo"
-                  onChange={handleChange}
-                />
-                {pacienteData.photo && (
-                  <img
-                    src={URL.createObjectURL(pacienteData.photo)}
-                    alt="Foto"
-                    className="user-photo"
-                  />
-                )}
               </div>
             </div>
             <div className="right-column-pas">

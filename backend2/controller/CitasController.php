@@ -3,17 +3,26 @@
 require_once '../config/cors_config.php';
 require_once '../config/database.php';
 require_once '../models/Citas.php';
+require_once '../models/Pagos.php';
+require_once '../models/Tratamiento.php';
+
+
 
 class CitasController
 {
     private $conn;
     private $cita;
+    private $tratamiento;
+    private $pago;
+    
 
     //Constructor
     public function __construct($db)
     {
         $this->conn = $db;
         $this->cita = new Citas($db);
+        $this->tratamiento = new Tratamiento($db);
+        $this->pago = new Pagos($db);
     }
 
     public function passCitas()
@@ -34,34 +43,53 @@ class CitasController
 
     public function addCita()
     {
+        $valorCero = 0;
         $data = json_decode(file_get_contents("php://input"));
-        $query = "INSERT INTO cita (fecha, hora, paciente, medico, tratamiento, pagado, costo, estado) VALUES (:fecha, :hora, :paciente, :medico, :tratamiento, :pagado, :costo, :estado)";
+        $query = "INSERT INTO cita (fecha, hora, paciente, medico, costo, tratamiento, pagado, estado) VALUES (:fecha, :hora, :paciente, :medico, :costo, :tratamiento, :pagado, :estado)";
+        $queryPago = "INSERT INTO pago (paciente, tratamiento, fecha, hora, costo, pagado, saldo, recibidoPor) VALUES (:paciente, :tratamiento, :fecha, :hora, :costo, :pagado, :saldo, :recibidoPor)";
 
         $this->cita->fecha = $data->fecha;
         $this->cita->hora = $data->hora;
         $this->cita->paciente = $data->paciente;
         $this->cita->medico = $data->medico;
+        $this->cita->costo = $data->costo;
         $this->cita->tratamiento = $data->tratamiento;
         $this->cita->pagado = $data->pagado;
-        $this->cita->costo = $data->costo;
         $this->cita->estado = $data->estado;
+        $this->pago->recibidoPor = $data->recibidoPor;
 
-        $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(':fecha', $this->cita->fecha);
-        $stmt->bindParam(':hora', $this->cita->hora);
-        $stmt->bindParam(':paciente', $this->cita->paciente);
-        $stmt->bindParam(':medico', $this->cita->medico);
-        $stmt->bindParam(':tratamiento', $this->cita->tratamiento);
-        $stmt->bindParam(':pagado', $this->cita->pagado);
-        $stmt->bindParam(':costo', $this->cita->costo);
-        $stmt->bindParam(':estado', $this->cita->estado);
+        $this->conn->beginTransaction();
 
         try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':fecha', $this->cita->fecha);
+            $stmt->bindParam(':hora', $this->cita->hora);
+            $stmt->bindParam(':paciente', $this->cita->paciente);
+            $stmt->bindParam(':medico', $this->cita->medico);
+            $stmt->bindParam(':costo', $this->cita->costo);
+            $stmt->bindParam(':tratamiento', $this->cita->tratamiento);
+            $stmt->bindParam(':pagado', $this->cita->pagado);
+            $stmt->bindParam(':estado', $this->cita->estado);
+
             $stmt->execute();
+
+            $stmt = $this->conn->prepare($queryPago);
+            $stmt->bindParam(':paciente', $this->cita->paciente);
+            $stmt->bindParam(':tratamiento', $this->cita->tratamiento);
+            $stmt->bindParam(':fecha', $this->cita->fecha);
+            $stmt->bindParam(':hora', $this->cita->hora);
+            $stmt->bindParam(':costo', $this->cita->costo);
+            $stmt->bindParam(':pagado', $valorCero);
+            $stmt->bindParam(':saldo', $this->cita->costo);
+            $stmt->bindParam(':recibidoPor', $this->pago->recibidoPor);
+
+            $stmt->execute();
+
+            $this->conn->commit();
             echo json_encode(array("message" => "exito"));
         } catch (PDOException $e) {
-            echo json_encode(array("message" => "fallo"));
+            $this->conn->rollBack();
+            echo json_encode(array("message" => "fallo" . $e));
         }
     }
 
@@ -119,7 +147,8 @@ class CitasController
         }
     }
 
-    public function count() {
+    public function count()
+    {
         $query = "SELECT COUNT(*) FROM cita";
         $stmt = $this->conn->prepare($query);
 

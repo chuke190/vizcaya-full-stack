@@ -49,8 +49,16 @@ import { AuthContext } from "./context/AuthContext";
 import RutaProtegida from "./components/Verificador";
 
 const App = () => {
+  const [auth, setAuth] = useState(!!localStorage.getItem("usuarioLogged"));
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('usuarioLogged');
+    if (storedUser) {
+      setLoggedInUser(JSON.parse(storedUser));
+      setAuth(true);
+    }
+  }, []);
 
   const [users, setUsers] = useState([]);
   const [pacientesData, setPacientesData] = useState([]);
@@ -63,80 +71,15 @@ const App = () => {
   const [citasData, setCitasData] = useState([]);
 
   const [pagosData, setPagosData] = useState([
-    {
-      id: 1,
-      paciente: "Ana López",
-      tratamiento: "Limpieza Dental",
-      enfermedad: "Maloclusión",
-      fecha: "2023-06-10",
-      hora: "10:00",
-      costo: "$500",
-      pagado: "$500",
-      saldo: "$0",
-      recibidoPor: "Secretaria",
-    },
-    {
-      id: 2,
-      paciente: "Juan Pérez",
-      tratamiento: "Empastes Dentales",
-      enfermedad: "Caries",
-      fecha: "2023-06-12",
-      hora: "14:00",
-      costo: "$100",
-      pagado: "$50",
-      saldo: "$50",
-      recibidoPor: "Secretaria",
-    },
+    
   ]);
 
   const [medicos, setMedicos] = useState([]);
 
   const [usuariosData, setUsuariosData] = useState([]);
 
-  // Cargar datos (ejemplo)
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let response = await fetch("/api/pagos");
-        let text = await response.text();
-        console.log("Respuesta /api/pagos:", text);
-        let data = JSON.parse(text);
-        setPagosData(
-          data.map((pago) => ({
-            ...pago,
-            saldo: parseFloat(pago.saldo),
-            pagado: parseFloat(pago.pagado),
-          }))
-        );
-      } catch (error) {
-        console.error("Error en /api/pagos:", error);
-      }
-
-      try {
-        let response = await fetch("/api/citas");
-        let text = await response.text();
-        console.log("Respuesta /api/citas:", text);
-        let data = JSON.parse(text);
-        setCitasData(data);
-      } catch (error) {
-        console.error("Error en /api/citas:", error);
-      }
-
-      try {
-        let response = await fetch("/api/usuarios");
-        let text = await response.text();
-        console.log("Respuesta /api/usuarios:", text);
-        let data = JSON.parse(text);
-        setUsuariosData(data);
-      } catch (error) {
-        console.error("Error en /api/usuarios:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const [ingresos, setIngresosData] = useState([]);
+
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       <Router>
@@ -145,32 +88,45 @@ const App = () => {
             <Routes>
               <Route
                 path="/"
-                element={<Login setLoggedInUser={setLoggedInUser} />}
+                element={
+                  <Login setLoggedInUser={setLoggedInUser} />
+                }
               />
               <Route
                 path="/dashboard"
-                element={<Dashboard loggedInUser={loggedInUser} />}
+                element={
+                  <RutaProtegida>
+                    <Dashboard loggedInUser={loggedInUser} />
+                  </RutaProtegida>
+                }
               />
 
               <Route
                 path="/admin"
                 element={
-                  <AdminDashboard
-                    pacientes={pacientesData}
-                    citas={citasData}
-                    ingresos={ingresos}
-                    medicos={medicos}
-                    users={users}
-                  />
+                  <RutaProtegida>
+                    <AdminDashboard
+                      pacientes={pacientesData}
+                      citas={citasData}
+                      ingresos={ingresos}
+                      medicos={medicos}
+                      users={users}
+                    />
+                  </RutaProtegida>
                 }
               />
               <Route
                 path="/admin/pacientes"
-                element={<PacientesView pacientes={pacientesData} />}
+                element={
+                  <RutaProtegida>
+                    <PacientesView pacientes={pacientesData} />
+                  </RutaProtegida>}
               />
               <Route
                 path="/admin/citas"
-                element={<CitasView citas={citasData} />}
+                element={<RutaProtegida>
+                  <CitasView citas={citasData} />
+                </RutaProtegida>}
               />
               <Route
                 path="/admin/medicos"
@@ -208,226 +164,237 @@ const App = () => {
 
               <Route
                 path="/usuarios"
-                element={<Usuarios users={users} setUsers={setUsers} />}
+                element={
+                  <RutaProtegida>
+                    <Usuarios users={users} setUsers={setUsers} />
+                  </RutaProtegida>}
               />
               <Route
                 path="/agregar-usuario"
-                element={<AgregarUsuario users={users} setUsers={setUsers} />}
+                element={<RutaProtegida>
+                  <AgregarUsuario users={users} setUsers={setUsers} />
+                </RutaProtegida>}
               />
               <Route
                 path="/editar-usuario/:id"
-                element={<EditUser users={users} setUsers={setUsers} />}
+                element={<RutaProtegida>
+                  <EditUser users={users} setUsers={setUsers} />
+                </RutaProtegida>}
               />
 
               <Route
                 path="/pacientes"
-                element={
+                element={<RutaProtegida>
                   <Pacientes
                     pacientesData={pacientesData}
                     setPacientesData={setPacientesData}
                   />
+                </RutaProtegida>
                 }
               />
               <Route
                 path="/agregar-paciente"
-                element={
+                element={<RutaProtegida>
                   <AgregarPaciente setPacientesData={setPacientesData} />
-                }
+                </RutaProtegida>}
               />
               <Route
                 path="/editar-paciente/:id"
-                element={
+                element={<RutaProtegida>
                   <EditPac
                     pacientesData={pacientesData}
                     setPacientesData={setPacientesData}
                   />
+                </RutaProtegida>
                 }
               />
 
               <Route
                 path="/especialidades"
-                element={
+                element={<RutaProtegida>
                   <Especialidades
                     especialidadesData={especialidadesData}
                     setEspecialidadesData={setEspecialidadesData}
                   />
-                }
+                </RutaProtegida>}
               />
               <Route
                 path="/agregar-especialidades"
-                element={
+                element={<RutaProtegida>
                   <AgregarEspecialidades
                     especialidadesData={especialidadesData}
                     setEspecialidadesData={setEspecialidadesData}
                   />
-                }
+                </RutaProtegida>}
               />
               <Route
                 path="/editar-especialidades/:id"
-                element={
+                element={<RutaProtegida>
                   <EditarEspecialidad
                     especialidadesData={especialidadesData}
                     setEspecialidadesData={setEspecialidadesData}
                   />
-                }
+                </RutaProtegida>}
               />
 
               <Route
                 path="/medicos"
-                element={<Medicos medicos={medicos} setMedicos={setMedicos} />}
+                element={<RutaProtegida><Medicos medicos={medicos} setMedicos={setMedicos} /></RutaProtegida>}
               />
               <Route
                 path="/agregar-medicos"
-                element={
+                element={<RutaProtegida>
                   <AgregarMedicos medicos={medicos} setMedicos={setMedicos} />
+                </RutaProtegida>
                 }
               />
               <Route
                 path="/editar-medico/:id"
-                element={
-                  <EditarMedico medicos={medicos} setMedicos={setMedicos} />
+                element={<RutaProtegida>
+                  <EditarMedico medicos={medicos} setMedicos={setMedicos} /></RutaProtegida>
                 }
               />
 
               <Route
                 path="/tratamientos"
-                element={
+                element={<RutaProtegida>
                   <Tratamientos
                     tratamientosData={tratamientosData}
                     setTratamientosData={setTratamientosData}
-                  />
+                  /></RutaProtegida>
                 }
               />
               <Route
                 path="/agregar-tratamientos"
-                element={
+                element={<RutaProtegida>
                   <AgregarTratamientos
                     tratamientosData={tratamientosData}
                     setTratamientosData={setTratamientosData}
-                  />
+                  /></RutaProtegida>
                 }
               />
               <Route
                 path="/editar-tratamiento/:id"
-                element={
+                element={<RutaProtegida>
                   <EditarTratamiento
                     tratamientosData={tratamientosData}
                     setTratamientosData={setTratamientosData}
-                  />
+                  /></RutaProtegida>
                 }
               />
 
               <Route
                 path="/citas"
-                element={
+                element={<RutaProtegida>
                   <Citas citasData={citasData} setCitasData={setCitasData} />
-                }
+                </RutaProtegida>}
               />
               <Route
                 path="/agregar-citas"
-                element={<AgregarCitas setCitasData={setCitasData} />}
+                element={<RutaProtegida><AgregarCitas setCitasData={setCitasData} loggedInUser={loggedInUser} /></RutaProtegida>}
               />
               <Route
                 path="/editar-cita/:id"
-                element={
+                element={<RutaProtegida>
                   <EditarCita
                     citasData={citasData}
                     setCitasData={setCitasData}
-                  />
+                  /></RutaProtegida>
                 }
               />
 
-              <Route path="/odontograma" element={<Odontograma />} />
+              <Route path="/odontograma" element={<RutaProtegida><Odontograma /></RutaProtegida>} />
 
               <Route
                 path="/historial-citas"
-                element={
+                element={<RutaProtegida>
                   <HistorialCitas
                     citasData={citasData}
                     setCitasData={setCitasData}
-                  />
+                  /></RutaProtegida>
                 }
               />
               <Route
                 path="/editar-historial-citas/:id"
-                element={
+                element={<RutaProtegida>
                   <EditarHistorialCitas
                     citasData={citasData}
                     setCitasData={setCitasData}
-                  />
+                  /></RutaProtegida>
                 }
               />
 
-              <Route path="/calendario" element={<Calendario />} />
+              <Route path="/calendario" element={<RutaProtegida><Calendario /></RutaProtegida>} />
 
               <Route
                 path="/pagos"
-                element={
+                element={<RutaProtegida>
                   <Pagos
                     pagosData={pagosData}
                     citasData={citasData}
                     setPagosData={setPagosData}
                     usuariosData={usuariosData}
-                  />
+                    loggedInUser={loggedInUser}
+                  /></RutaProtegida>
                 }
               />
               <Route
                 path="/ver-pago/:id"
-                element={
+                element={<RutaProtegida>
                   <VerPago
                     pagosData={pagosData}
                     citasData={citasData}
                     usuariosData={usuariosData}
                     setPagosData={setPagosData}
                     setIngresosData={setIngresosData}
-                  />
+                  /></RutaProtegida>
                 }
               />
               <Route
                 path="/cobrar-pago/:id"
-                element={
+                element={<RutaProtegida>
                   <CobrarPago
                     pagosData={pagosData}
                     setPagosData={setPagosData}
-                  />
+                  /></RutaProtegida>
                 }
               />
               <Route
                 path="/editar-pago/:id"
-                element={
+                element={<RutaProtegida>
                   <EditarPago
                     pagosData={pagosData}
                     setPagosData={setPagosData}
-                  />
+                  /></RutaProtegida>
                 }
               />
               <Route
                 path="/agregar-pago"
-                element={<AgregarPago setPagosData={setPagosData} />}
+                element={<RutaProtegida><AgregarPago setPagosData={setPagosData} /></RutaProtegida>}
               />
 
-              <Route path="/reportes" element={<Reportes />} />
+              <Route path="/reportes" element={<RutaProtegida><Reportes /></RutaProtegida>} />
 
-              <Route path="/reportes-paciente" element={<ReportesPaciente />} />
-              <Route path="/reportes-medico" element={<ReportesMedico />} />
+              <Route path="/reportes-paciente" element={<RutaProtegida><ReportesPaciente /></RutaProtegida>} />
+              <Route path="/reportes-medico" element={<RutaProtegida><ReportesMedico /></RutaProtegida>} />
 
-              <Route path="/radiografias" element={<Radiografias />} />
+              <Route path="/radiografias" element={<RutaProtegida><Radiografias /></RutaProtegida>} />
               <Route
                 path="/ver-radiografias/:patientId"
-                element={<VerRadiografias />}
+                element={<RutaProtegida><VerRadiografias /></RutaProtegida>}
               />
               <Route
                 path="/consentimientoinformado"
-                element={<ConsentimientoInformado />}
+                element={<RutaProtegida><ConsentimientoInformado /></RutaProtegida>}
               />
 
               <Route
                 path="/recetario-paciente"
-                element={
+                element={<RutaProtegida>
                   <RecetarioPaciente
                     medicos={medicos}
                     setMedicos={setMedicos}
-                  />
+                  /></RutaProtegida>
                 }
               />
             </Routes>

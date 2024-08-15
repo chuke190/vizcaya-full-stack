@@ -60,7 +60,7 @@ const AgregarUsuario = ({ users, setUsers }) => {
             return;
         }
         setError('');
-        const response = await fetch('http://localhost/vizcaya-full-stack/backend2/public/index.php?action=adduser', {
+        const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=adduser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -181,15 +181,6 @@ const AgregarUsuario = ({ users, setUsers }) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="photo">Foto:</label>
-                            <input 
-                                type="file" 
-                                id="photo" 
-                                name="photo" 
-                                accept="image/*" 
-                                onChange={handleFileChange} 
-                            />
-                            {userData.photo && <img src={userData.photo} alt="Preview" className="photo-preview" />}
                         </div>
                         <div className="header-subtitulo">
                             <h3>Contraseña de Usuario</h3>

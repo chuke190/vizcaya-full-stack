@@ -6,16 +6,8 @@ import '../styles/Dashboard.css';
 
 const Dashboard = ({ loggedInUser }) => {
     const navigate = useNavigate();
-    
-    React.useEffect(() => {
-        if (!loggedInUser) {
-            navigate('/');
-        }
-    }, [loggedInUser, navigate]);
 
-    if (!loggedInUser) {
-        return null; // O muestra un mensaje de carga/spinner
-    }
+    console.log('loggedInUser:', loggedInUser);
 
     const adminCards = [
         { icon: <i className="fas fa-users"></i>, title: "Usuarios", link: "/Usuarios" },
