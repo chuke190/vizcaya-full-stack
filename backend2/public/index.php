@@ -2,6 +2,7 @@
 
 require_once '../config/cors_config.php';
 require_once '../config/database.php';
+
 require_once '../controller/UserController.php';
 require_once '../controller/PacienteController.php';
 require_once '../controller/EspecialidadController.php';
@@ -10,6 +11,7 @@ require_once '../controller/TratamientoController.php';
 require_once '../controller/CitasController.php';
 require_once '../controller/PagosController.php';
 require_once '../controller/EventoController.php';
+require_once '../controller/HistorialPagosController.php';
 
 
 $database = new Database();
@@ -23,6 +25,7 @@ $tratamiento = new TratamientoController($db);
 $cita = new CitasController($db);
 $pagos = new PagosController($db);
 $evento = new EventoController($db);
+$historialPagos = new HistorialPagosController($db);
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
@@ -147,6 +150,17 @@ switch ($action) {
         break;
     case 'addcalendario':
         $evento->addEvento();
+        break;
+
+    // VVV Historial de Pagos VVV
+    case 'passhistorialpagos':
+        $historialPagos->passHistorialPagos();
+        break;
+    case 'gethistorialpagos':
+        $historialPagos->getHistorialPagos();
+        break;
+    case 'addhistorialpago':
+        $historialPagos->addHistorialPago();
         break;
     default:
         echo json_encode(array("message" => "No se encontró la acción"));

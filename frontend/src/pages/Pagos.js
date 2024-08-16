@@ -5,7 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Pagos.css';
 import Nav from '../components/Nav';
 
-const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, loggedInUser }) => {
+const Pagos = ({ pagosData, citasData, setCitasData, usuariosData, setPagosData, loggedInUser }) => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +25,20 @@ const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, loggedInUser 
             }
         };
         fetchPagos();
-    }, [setPagosData]);
+
+        const fetchCitas = async () => {
+            try {
+                const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=getcitas');
+                const data = await response.json();
+                setCitasData(data);
+                console.log(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        fetchCitas();
+    }, [setPagosData, setCitasData]);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -108,6 +121,27 @@ const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, loggedInUser 
                 } else {
                     alert('Ocurrió un error al realizar el pago. Intente nuevamente.');
                 }
+
+                const response2 = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=addhistorialpago', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        pago_id: id,
+                        cantidad: amountPaid,
+                        recibio: loggedInUser.nombre,
+                        fecha: new Date().toISOString().slice(0, 19),
+                    }),
+                }
+                );
+                const data2 = await response2.json();
+                console.log(data2.message);
+                if (data2.message === 'exito') {
+                    console.log('Historial de pagos actualizado exitosamente.');
+                } else {
+                    console.log('Ocurrió un error al actualizar el historial de pagos.');
+                }
             } else {
                 alert('Monto ingresado no válido o excede el saldo pendiente.');
             }
@@ -184,7 +218,7 @@ const Pagos = ({ pagosData, citasData, usuariosData, setPagosData, loggedInUser 
                                     <td>
                                         <button className="btn-ver-p" onClick={() => handleVerPago(pago.id)}>Ver</button>
                                         <button className="btn-delete-p" onClick={() => handleDeletePago(pago.id)}>Eliminar</button>
-                                        {pago.saldo > 0 && <button className="btn-cobrar-p" onClick={() => handleCobrarPago(pago.id)}>Cobrar</button>}
+                                        {pago.saldo > 0 && <button className="btn-cobrar" onClick={() => handleCobrarPago(pago.id)}>Cobrar</button>}
                                     </td>
                                 </tr>
                             ))}

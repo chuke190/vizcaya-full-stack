@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Nav from './Nav';
 import '../styles/VerPago.css';
@@ -10,13 +10,35 @@ const VerPago = ({ pagosData, citasData, usuariosData, setPagosData, setIngresos
     const { usuarioLogueado } = location.state || {};
     const [montoACobrar, setMontoACobrar] = useState('');
     const { citaSeleccionada } = location.state || {};
-
+    const [ historialPagos, setHistorialPagos ] = useState([]);
     const pagoId = parseInt(id, 10);
+    
+    useEffect(() => {
+        const fetchHistorialPagos = async () => {
+            const response = await fetch('http://localhost/sisDenatal/backend2/public/index.php?action=gethistorialpagos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    pago_id: pagoId,
+                 }),
+            });
+            const data = await response.json();
+            setHistorialPagos(data);
+            console.log(data);
+        };
+
+        fetchHistorialPagos();
+    }, [pagoId]);
+    
     const pago = pagosData.find(p => p.id === pagoId);
     if (!pago) {
         console.log(pago)
         return <div>Pago no encontrado</div>;
     }
+    
+    
 
     if (!Array.isArray(citasData)) {
         return <div>Error: citasData no es un array o no está definido.</div>;
@@ -27,95 +49,8 @@ const VerPago = ({ pagosData, citasData, usuariosData, setPagosData, setIngresos
     const estadoCita = cita ? cita.estado : 'Desconocido';
     const usuarioRecibio = usuariosData.find(u => u.id === pago.recibidoPor) || {};
 
-    const handleCobrar = () => {
-        if (pago.saldo <= 0 || estadoCita !== 'Pendiente') {
-            alert('No se puede cobrar. El saldo es 0 o el estado de la cita no es pendiente.');
-            return;
-        }
-        if (!Array.isArray(citasData)) {
-            console.error('citasData no es un array o no está definido.');
-            return;
-        }
-
-        const monto = parseFloat(montoACobrar);
-        if (isNaN(monto) || monto <= 0 || monto > parseFloat(pago.saldo)) {
-            alert('Monto ingresado no válido o excede el saldo pendiente.');
-            return;
-        }
-
-        const updatedPagos = pagosData.map(p =>
-            p.id === pagoId
-                ? {
-                    ...p,
-                    saldo: (parseFloat((p.saldo).slice(1)) - monto).toFixed(2),
-                    pagado: (parseFloat((p.pagado).slice(1)) + monto).toFixed(2),
-                    recibidoPor: usuarioLogueado ? usuarioLogueado.id : p.recibidoPor,
-                }
-                : p
-        );
-
-        /* pagosData.map(p =>
-            console.log(parseFloat((p.saldo).slice(1)))
-        ); */
-
-        setPagosData(updatedPagos);
-        setMontoACobrar('');
-
-        const pagoActualizado = updatedPagos.find(p => p.id === pagoId);
-        if (pagoActualizado) {
-            if (parseFloat(pagoActualizado.saldo) <= 0) {
-                alert('El saldo ha sido completamente pagado.');
-            } else {
-                alert(`Pago de $${monto} realizado exitosamente.`);
-            }
-        } else {
-            console.error('Pago actualizado no encontrado en updatedPagos');
-        }
-
-        setIngresosData(prevIngresos => {
-            if (!Array.isArray(prevIngresos)) {
-                console.error('prevIngresos no es un array');
-                return [];
-            }
-
-            const existingIngreso = prevIngresos.find(i => i.pagoId === pagoId);
-            if (existingIngreso) {
-                console.log(prevIngresos)
-                return prevIngresos.map(i =>
-                    i.pagoId === pagoId
-                        ? { ...i, monto: i.monto + monto }
-                        : i
-                );
-            } else {
-                console.log("pagoId", pagoId, "monto",monto)
-                return [...prevIngresos, { pagoId, monto }];
-            }
-        });
-    };
-
     const handleBack = () => {
         navigate('/pagos');
-    };
-
-    const handleVerIngresos = () => {
-        const ingresos = {
-            detalles: pagosData.map(pago => {
-                const cita = citasData.find(c => c.id === pago.id) || {};
-                return {
-                    id: pago.id,
-                    fecha: cita.fecha,
-                    hora: cita.hora,
-                    monto: parseFloat(pago.costo),
-                    cobrado: parseFloat(pago.pagado),
-                    usuarioRecibio: usuariosData.find(u => u.id === pago.recibidoPor) || {},
-                    paciente: pago.paciente,
-                    tratamiento: pago.tratamiento,
-                    medico: cita.medico || 'Desconocido'
-                };
-            })
-        };
-
-        navigate('/admin/ingresos', { state: { ingresos, citasData } });
     };
 
     return (
@@ -160,9 +95,39 @@ const VerPago = ({ pagosData, citasData, usuariosData, setPagosData, setIngresos
                         </tbody>
                     </table>
                 </div>
+
             ) : (
                 <p>No hay detalles de la cita.</p>
             )}
+            <h3>Detalles del Pago</h3>
+            {historialPagos ? (
+                <div className="usuarios-container">
+                    <table className="cita-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha/Hora</th>
+                                <th>Monto</th>
+                                <th>Recibe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {historialPagos.map(p => (
+                                <tr key={p.id}>
+                                    <td>{p.id}</td>
+                                    <td>{p.fecha}</td>
+                                    <td>{p.cantidad}</td>
+                                    <td>{p.recibio}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                ) : (
+                    <p>No hay detalles del pago.</p>
+                )}
+
+
 
             <button className="btn-back" onClick={handleBack}>Regresar a Pagos</button>
         </div>

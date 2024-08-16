@@ -332,6 +332,7 @@ const App = () => {
                   <Pagos
                     pagosData={pagosData}
                     citasData={citasData}
+                    setCitasData={setCitasData}
                     setPagosData={setPagosData}
                     usuariosData={usuariosData}
                     loggedInUser={loggedInUser}

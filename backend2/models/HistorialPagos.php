@@ -2,18 +2,20 @@
 
 require_once '../config/cors_config.php';
 
-class Evento {
+class HistorialPagos
+{
     private $conn;
-    private $table_name = "calendario";
+    private $table_name = "historialpagos";
 
     public $id;
-    public $titulo;
-    public $start;
-    public $end;
+    public $pago_id;
+    public $cantidad;
+    public $fecha;
+    public $recibio;
 
     public function __construct($db)
     {
         $this->conn = $db;
     }
-}
 
+}
