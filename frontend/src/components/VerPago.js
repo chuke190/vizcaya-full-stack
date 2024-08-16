@@ -99,7 +99,7 @@ const VerPago = ({ pagosData, citasData, usuariosData, setPagosData, setIngresos
             ) : (
                 <p>No hay detalles de la cita.</p>
             )}
-            <h3>Detalles del Pago</h3>
+            <h3>Pagos realizados</h3>
             {historialPagos ? (
                 <div className="usuarios-container">
                     <table className="cita-table">

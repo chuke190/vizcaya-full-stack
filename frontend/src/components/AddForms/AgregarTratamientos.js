@@ -17,6 +17,7 @@ const AgregarTratamiento = ({ tratamientosData, setTratamientosData }) => {
       ...prevState,
       [name]: value,
     }));
+    console.log(tratamientoData);
   };
 
   const handleSubmit = async (e) => {
@@ -35,7 +36,6 @@ const AgregarTratamiento = ({ tratamientosData, setTratamientosData }) => {
       }
     );
     const data = await response.json();
-    console.log(data);
     if (data.message === "exito") {
       setTratamientosData((prevData) => [
         ...prevData,

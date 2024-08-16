@@ -201,7 +201,7 @@ const Pagos = ({ pagosData, citasData, setCitasData, usuariosData, setPagosData,
                                 <th>Fecha</th>
                                 <th>Hora</th>
                                 <th>Costo</th>
-                                <th>Saldo</th>
+                                <th>Saldo pendiente</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
