@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logoDentalViscaya.png";
 import "../styles/Nav.css"; // Asegúrate de tener los estilos correspondientes
 
+function cerrarSesion() {
+  localStorage.removeItem("usuarioLogged");
+  window.location.href = "/";
+}
+
 const Nav = () => {
   return (
     <nav className="navbar">
@@ -28,6 +33,9 @@ const Nav = () => {
         </li>
         <li>
           <Link to="/admin">Admin</Link>
+        </li>
+        <li>
+          <Link onClick={cerrarSesion}>Cerrar sesión</Link>
         </li>
       </ul>
     </nav>

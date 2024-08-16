@@ -47,7 +47,8 @@ const Dashboard = ({ loggedInUser }) => {
         { icon: <i className="fas fa-history"></i>, title: "Historial Citas", link: "/Historial-Citas" },
         { icon: <i className="fas fa-tooth"></i>, title: "Odontograma", link: "/Odontograma" },
         { icon: <i className="fas fa-calendar-alt"></i>, title: "Citas", link: "/Citas" },
-        { }
+        
+        
     ];
 
     let cardsData = [];
