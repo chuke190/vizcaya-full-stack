@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import NavBarInicio from '../components/NavBarInicio';
 import Card from '../components/Card';
+import CardL from '../components/CardLogout';
 import '../styles/Dashboard.css';
 
 const Dashboard = ({ loggedInUser }) => {
@@ -32,9 +33,7 @@ const Dashboard = ({ loggedInUser }) => {
         { icon: <i className="fas fa-history"></i>, title: "Historial Citas", link: "/Historial-Citas" },
         { icon: <i className="fas fa-calendar"></i>, title: "Calendario", link: "/Calendario" },
         { icon: <i className="fas fa-money-check-alt"></i>, title: "Pagos", link: "/Pagos" },
-        { },{ },
         { icon: <i className="fas fa-chart-line"></i>, title: "Reportes", link: "/Reportes" },
-        { },{ },
     ];
 
     const medicoCards = [
@@ -43,7 +42,6 @@ const Dashboard = ({ loggedInUser }) => {
         { icon: <i className="fas fa-x-ray"></i>, title: "Radiografias", link: "/Radiografias" },
         { icon: <i className="fas fa-chart-line"></i>, title: "Reportes", link: "/Reportes" },
         { icon: <i className="fas fa-calendar"></i>, title: "Calendario", link: "/Calendario" },
-        { },
         { icon: <i className="fas fa-history"></i>, title: "Historial Citas", link: "/Historial-Citas" },
         { icon: <i className="fas fa-tooth"></i>, title: "Odontograma", link: "/Odontograma" },
         { icon: <i className="fas fa-calendar-alt"></i>, title: "Citas", link: "/Citas" },
@@ -73,6 +71,7 @@ const Dashboard = ({ loggedInUser }) => {
                         link={card.link}
                     />
                 ))}
+                <CardL icon={<i className="fas fa-sign-out-alt"></i>} title="Cerrar Sesión" />
             </div>
         </div>
     );
